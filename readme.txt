@@ -1,10 +1,10 @@
-=== WP Basic Auth ===
+=== WP BASIC Auth ===
 Contributors: wokamoto, megumithemes
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9S8AJCY7XB8F4&lc=JP&item_name=WordPress%20Plugins&item_number=wp%2dplugins&currency_code=JPY&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
 Tags: BASIC Auth, Auth
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
 Enabling this plugin allows you to set up Basic authentication on your site using your WordPress's user name and password.
 
