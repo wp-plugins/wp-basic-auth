@@ -13,6 +13,8 @@ Enabling this plugin allows you to set up Basic authentication on your site usin
 Enabling this plugin allows you to set up Basic authentication on your site using your WordPress's user name and password.
 It is very useful for setting up Basic authentication temporarily to your development WordPress site and so on.
 
+This plugin banner image was created by [Arcted](http://arcted.jp/ "Arcted - Web Developer Portfolio"). Thank you, Arcted!
+
 == Installation ==
 
 1. Upload the entire `wp-basic-auth` folder to the `/wp-content/plugins/` directory.
