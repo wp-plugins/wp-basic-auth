@@ -4,13 +4,13 @@ Plugin Name: WP BASIC Auth
 Plugin URI: https://github.com/wokamoto/wp-basic-auth
 Description: Enabling this plugin allows you to set up Basic authentication on your site using your WordPress's user name and password. 
 Author: wokamoto
-Version: 1.1.1
+Version: 1.1.3
 Author URI: http://dogmap.jp/
 
 License:
  Released under the GPL license
   http://www.gnu.org/copyleft/gpl.html
-  Copyright 2013 wokamoto (email : wokamoto1973@gmail.com)
+  Copyright 2013-2015 wokamoto (email : wokamoto1973@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,11 +38,15 @@ RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
 # END WP BASIC Auth
 ';
 
-	function __construct(){
-		add_action('template_redirect',array(&$this, 'basic_auth'));
+	static $instance;
 
-		register_activation_hook(__FILE__, array(&$this, 'activate'));
-		register_deactivation_hook(__FILE__, array(&$this, 'deactivate'));
+	function __construct(){
+		self::$instance = $this;
+
+		add_action('template_redirect', array($this, 'basic_auth'), 1);
+
+		register_activation_hook(__FILE__, array($this, 'activate'));
+		register_deactivation_hook(__FILE__, array($this, 'deactivate'));
 	}
 
 	public function activate(){
@@ -77,13 +81,16 @@ RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
 			}
 		}
 
-		if ( !is_wp_error(wp_authenticate($usr, $pwd)) )
+		$is_authenticated = wp_authenticate($usr, $pwd);
+		if ( !is_wp_error( $is_authenticated ) )
 			return;
 
 		header('WWW-Authenticate: Basic realm="Please Enter Your Password"');
-		header('HTTP/1.1 401 Unauthorized');
-		echo 'Authorization Required';
-		die();
+		wp_die(
+			'You need to enter a Username and a Password if you want to see this website.',
+			'Authorization Required',
+			array( 'response' => 401 )
+			);
 	}
 }
 new wp_basic_auth();
